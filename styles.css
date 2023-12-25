@@ -1,0 +1,51 @@
+/* styles.css */
+
+/* Общие стили */
+body {
+    font-family: 'Arial', sans-serif;
+}
+
+/* Навигационная панель */
+.navbar {
+    border-bottom: 1px solid #ddd;
+}
+
+/* Серая зона с карточками */
+.card {
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+/* Поисковая строка и категории */
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.btn-group {
+    margin-bottom: 1rem;
+}
+
+/* Футер */
+.footer {
+                background-color: #333333;
+            color: #ffffff;
+    width: 100%;
+    text-align: center;
+    position: absolute;
+}
+
+
+/* Адаптивные стили */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .nav {
+        margin-top: 1rem;
+    }
+}

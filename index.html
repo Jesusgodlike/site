@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Магазин компьютерной техники</title>
+    <!-- Подключение Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Ваш собственный CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+
+<nav class="navbar navbar-light bg-white">
+    <a class="navbar-brand" href="#">
+        <img src="logo.png" alt="Логотип">
+    </a>
+    <ul class="nav">
+        <li class="nav-item"><a class="nav-link" href="uslugi.html">Наши услуги</a></li>
+        <li class="nav-item"><a class="nav-link" href="http://localhost/test/">Войти</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Почему мы</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Контакты</a></li>
+    </ul>
+</nav>
+
+
+
+
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-md-12">
+            <form id="searchForm" class="form-inline">
+                <input class="form-control mr-sm-2" type="text" placeholder="Поиск" aria-label="Search" id="searchInput">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="button" onclick="searchProducts()">Найти</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    const allProducts = [
+        { img: '2.png', title: 'PowerElite i7', description: 'Процессор: Intel Core i7\nRAM: 16 ГБ\nХранение: 512 ГБ SSD\nГрафика: NVIDIA GeForce GTX 1660\nЦена: $1299.99' },
+        { img: '3.png', title: 'SpeedMaster Ryzen 5', description: 'Процессор: AMD Ryzen 5\nRAM: 8 ГБ\nХранение: 1 ТБ HDD\nГрафика: AMD Radeon RX 580\nЦена: $899.99' },
+        { img: '4.png', title: 'OfficePro Mini', description: 'Процессор: Intel Core i5\nRAM: 8 ГБ\nХранение: 256 ГБ SSD\nГрафика: Integrated Intel UHD\nЦена: $699.99' },
+        { img: '11.png', title: 'EcoScreen 19E', description: 'Размер: 19 дюймов\nРазрешение: WXGA\nЭнергопотребление: низкое\nКрепление VESA: Да\nЦена: $89.99' },
+        // Добавлены новые продукты
+        { img: '5.png', title: 'GamerXtreme i9', description: 'Процессор: Intel Core i9\nRAM: 32 ГБ\nХранение: 1 ТБ SSD + 2 ТБ HDD\nГрафика: NVIDIA RTX 3080\nЦена: $2499.99' },
+        { img: '6.png', title: 'HomeMaster Ryzen 3', description: 'Процессор: AMD Ryzen 3\nRAM: 4 ГБ\nХранение: 128 ГБ SSD\nГрафика: Integrated Radeon Vega\nЦена: $499.99' },
+        { img: '7.png', title: 'BusinessEssentials i3', description: 'Процессор: Intel Core i3\nRAM: 8 ГБ\nХранение: 256 ГБ SSD\nГрафика: Integrated Intel UHD\nЦена: $599.99' },
+        { img: '8.png', title: 'StreamLite Celeron', description: 'Процессор: Intel Celeron\nRAM: 4 ГБ\nХранение: 64 ГБ eMMC\nГрафика: Integrated Intel UHD\nЦена: $299.99' },
+        { img: '12.png', title: 'ProLite 32K HDR', description: 'Размер: 32 дюйма\nРазрешение: 4K\nHDR: Да\nКонтрастность: 1000:1\nЦена: $399.99' },
+        { img: '15.png', title: 'SlimView 22S', description: 'Размер: 22 дюйма\nРазрешение: HD\nТип: TN\nТонкая рамка\nЦена: $129.99' },
+        { img: '16.png', title: 'UltraVision 27X', description: 'Размер: 27 дюймов\nРазрешение: 2K\nТехнология: LED\nРеакция: 5 мс\nЦена: $249.99' },
+        { img: '17.png', title: 'EcoView 24', description: 'Размер: 24 дюйма\nРазрешение: Full HD\nТехнология: IPS\nЧастота обновления: 75 Гц\nЦена: $199.99' }
+    ];
+
+function displayProducts(products) {
+        const productsContainer = document.getElementById('productsContainer');
+        productsContainer.innerHTML = '';
+
+        products.forEach(product => {
+            const card = document.createElement('div');
+            card.classList.add('col-md-3', 'mb-3');
+
+            card.innerHTML = `
+                <div class="card">
+                    <img src="${product.img}" class="card-img-top" alt="${product.title}">
+                    <div class="card-body">
+                        <h5 class="card-title">${product.title}</h5>
+                        <p class="card-text">${product.description}</p>
+                    </div>
+                </div>
+            `;
+
+            productsContainer.appendChild(card);
+        });
+
+        // Вызываем функцию поиска после отображения продуктов
+        searchProducts();
+    }
+
+    function searchProducts() {
+        const searchInput = document.getElementById('searchInput');
+        const searchTerm = searchInput.value.toLowerCase();
+
+        const filteredProducts = allProducts.filter(product =>
+            product.title.toLowerCase().includes(searchTerm) ||
+            product.description.toLowerCase().includes(searchTerm)
+        );
+
+        // Обновляем интерфейс с отфильтрованными продуктами
+        displayProducts(filteredProducts);
+    }
+
+    // Отображаем все продукты при загрузке страницы
+    displayProducts(allProducts);
+</script>
+
+<!-- Серая зона с карточками Bootstrap -->
+<div class="container mt-5">
+    <div class="row" id="productsContainer">
+        <!-- Заглушка для первой карточки -->
+        <div class="col-md-3 mb-3">
+            <div class="card">
+                <img src="2.png" class="card-img-top" alt="Картинка 1">
+                <div class="card-body">
+                    <h5 class="card-title">PowerElite i7</h5>
+                    <p class="card-text">
+                    Процессор: Intel Core i7
+                    RAM: 16 ГБ
+                    Хранение: 512 ГБ SSD
+                    Графика: NVIDIA GeForce GTX 1660
+                    Цена: $1299.99</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Заглушка для второй карточки -->
+        <div class="col-md-3 mb-3">
+            <div class="card">
+                <img src="3.png" class="card-img-top" alt="Картинка 2">
+                <div class="card-body">
+                    <h5 class="card-title">SpeedMaster Ryzen 5</h5>
+                    <p class="card-text">Процессор: AMD Ryzen 5
+RAM: 8 ГБ
+Хранение: 1 ТБ HDD
+Графика: AMD Radeon RX 580
+Цена: $899.99</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Заглушка для третьей карточки -->
+        <div class="col-md-3 mb-3">
+            <div class="card">
+                <img src="4.png" class="card-img-top" alt="Картинка 3">
+                <div class="card-body">
+                    <h5 class="card-title">OfficePro Mini</h5>
+                    <p class="card-text">Процессор: Intel Core i5
+RAM: 8 ГБ
+Хранение: 256 ГБ SSD
+Графика: Integrated Intel UHD
+Цена: $699.99</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Заглушка для четвертой карточки -->
+        <div class="col-md-3 mb-3">
+            <div class="card">
+                <img src="11.png" class="card-img-top" alt="Картинка 4">
+                <div class="card-body">
+                    <h5 class="card-title">EcoScreen 19E</h5>
+                    <p class="card-text">Размер: 19 дюймов
+Разрешение: WXGA
+Энергопотребление: низкое
+Крепление VESA: Да
+Цена: $89.99
+</p>
+                </div>
+            </div>
+        </div>
+        
+               <!-- Новые карточки -->
+        <div class="col-md-3 mb-3">
+            <div class="card">
+                <img src="5.png" class="card-img-top" alt="Картинка 5">
+                <div class="card-body">
+                    <h5 class="card-title">GamerXtreme i9</h5>
+                    <p class="card-text">Процессор: Intel Core i9
+RAM: 32 ГБ
+Хранение: 1 ТБ SSD + 2 ТБ HDD
+Графика: NVIDIA RTX 3080
+Цена: $2499.99</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <div class="card">
+                <img src="6.png" class="card-img-top" alt="Картинка 6">
+                <div class="card-body">
+                    <h5 class="card-title">HomeMaster Ryzen 3</h5>
+                    <p class="card-text">Процессор: AMD Ryzen 3
+RAM: 4 ГБ
+Хранение: 128 ГБ SSD
+Графика: Integrated Radeon Vega
+Цена: $499.99</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <div class="card">
+                <img src="7.png" class="card-img-top" alt="Картинка 7">
+                <div class="card-body">
+                    <h5 class="card-title">BusinessEssentials i3</h5>
+                    <p class="card-text">Процессор: Intel Core i3
+RAM: 8 ГБ
+Хранение: 256 ГБ SSD
+Графика: Integrated Intel UHD
+Цена: $599.99</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <div class="card">
+                <img src="8.png" class="card-img-top" alt="Картинка 8">
+                <div class="card-body">
+                    <h5 class="card-title">StreamLite Celeron</h5>
+                    <p class="card-text">Процессор: Intel Celeron
+RAM: 4 ГБ
+Хранение: 64 ГБ eMMC
+Графика: Integrated Intel UHD
+Цена: $299.99</p>
+                </div>
+            </div>
+        </div>
+               
+        <div class="col-md-3 mb-3">
+            <div class="card">
+                <img src="12.png" class="card-img-top" alt="Картинка 9">
+                <div class="card-body">
+                    <h5 class="card-title">ProLite 32K HDR</h5>
+                    <p class="card-text">Размер: 32 дюйма
+Разрешение: 4K
+HDR: Да
+Контрастность: 1000:1
+Цена: $399.99</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3 mb-3">
+            <div class="card">
+                <img src="15.png" class="card-img-top" alt="Картинка 10">
+                <div class="card-body">
+                    <h5 class="card-title">SlimView 22S</h5>
+                    <p class="card-text">Размер: 22 дюйма
+Разрешение: HD
+Тип: TN
+Тонкая рамка
+Цена: $129.99</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3 mb-3">
+            <div class="card">
+                <img src="16.png" class="card-img-top" alt="Картинка 11">
+                <div class="card-body">
+                    <h5 class="card-title">UltraVision 27X</h5>
+                    <p class="card-text">Размер: 27 дюймов
+Разрешение: 2K
+Технология: LED
+Реакция: 5 мс
+Цена: $249.99</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3 mb-3">
+            <div class="card">
+                <img src="17.png" class="card-img-top" alt="Картинка 12">
+                <div class="card-body">
+                    <h5 class="card-title">EcoView 24</h5>
+                    <p class="card-text">Размер: 24 дюйма
+Разрешение: Full HD
+Технология: IPS
+Частота обновления: 75 Гц
+Цена: $199.99</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Футер -->
+<footer class="bg-dark text-white mt-5">
+    <div class="footer">
+        <div class="row">
+            <div class="col-md-6">
+                <p>Номера телефонов: +7 123 456 789, +7 987 654 321</p>
+            </div>
+            <div class="col-md-6">
+                <p>Казахстан 2023</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<!-- Подключение Bootstrap JS и ваших собственных скриптов JavaScript -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="scripts.js"></script>
+</body>
+</html>
